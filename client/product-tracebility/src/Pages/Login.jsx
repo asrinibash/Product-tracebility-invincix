@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, ChevronRight, BarChart3, Truck, Factory } from "lucide-react";
+import { Mail, Lock, ChevronRight, BarChart3, Truck, Factory,BoxesIcon } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -79,11 +79,11 @@ const Login = () => {
         <div className="flex flex-col lg:flex-row">
           <div className="lg:w-1/2 p-8">
             <div className="flex items-center space-x-2 mb-8">
-              <Mail className="h-8 w-8 text-blue-600" />
+              <BoxesIcon className="h-8 w-8 text-blue-600" />
               <div>
                 <h1 className="text-2xl font-bold">Invincix</h1>
                 <p className="text-sm text-muted-foreground">
-                  Del Monte Supply Chain Portal
+                  Del Monte - Blockchain based Supply Chain Portal
                 </p>
               </div>
             </div>

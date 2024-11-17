@@ -8,7 +8,8 @@ import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import logo from "../assets/logo.svg"
+import logo from "../assets/logo.svg";
+import bgImage from "../assets/bgImage.jpg"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -60,7 +61,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full relative bg-login bg-cover bg-center bg-no-repeat">
+    <div className="min-h-screen w-full relative bg-cover bg-center bg-no-repeat"
+    style={{ 
+      backgroundImage: `url(${bgImage})`
+    }}>
     {/* Logo Container - Absolute positioned to top-left */}
     <div className="absolute top-10 left-10">
       <img 

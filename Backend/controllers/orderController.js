@@ -1,125 +1,69 @@
-const Order = require('../models/Order');
-const Product = require('../models/Product');
-const User = require('../models/User');
+const Order = require("../models/Order");
 
 // Create a new order
 exports.createOrder = async (req, res) => {
   try {
-    const { products, toUserId } = req.body;
+    const { from_Id, to_Id, productId, productName, quantity, price } =
+      req.body;
 
-    const order = new Order({
-      from: req.user._id,
-      to: toUserId,
-      products: products.map(p => ({
-        product: p.productId,
-        quantity: p.quantity,
-        price: p.price
-      })),
-      totalAmount: products.reduce((sum, p) => sum + (p.price * p.quantity), 0)
+    // Calculate total amount
+    let totalAmount = quantity * price;
+
+    // Create the order
+    const newOrder = new Order({
+      from_Id,
+      to_Id,
+      productId,
+      productName,
+      quantity,
+      price,
+      totalAmount,
     });
 
-    await order.save();
-
-    res.status(201).json({
-      message: 'Order created successfully',
-      order
-    });
+    await newOrder.save();
+    res.status(201).json(newOrder);
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 // Update order status
 exports.updateOrderStatus = async (req, res) => {
+  const { orderNumber } = req.params;
+  const { status } = req.body;
+
   try {
-    const { orderId } = req.params;
-    const { status } = req.body;
+    // Find the order by orderNumber
+    const order = await Order.findOne({ orderNumber });
+    if (!order) return res.status(404).json({ message: "Order not found" });
 
-    const order = await Order.findById(orderId);
-    if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
-    }
-
+    // Update status
     order.status = status;
-    if (status === 'delivered') {
-      // Update product ownership and add to traceability chain
-      for (const item of order.products) {
-        const product = await Product.findById(item.product);
-        product.currentOwner = order.to;
-
-        // Update specific role fields based on the recipient
-        const recipient = await User.findById(order.to);
-        if (recipient.role === 'manufacturer') {
-          product.manufacturer = recipient._id;
-        } else if (recipient.role === 'distributor') {
-          product.distributor = recipient._id;
-        } else if (recipient.role === 'retailer') {
-          product.retailer = recipient._id;
-        }
-
-        product.traceabilityChain.push({
-          actor: req.user._id,
-          action: `Transferred to ${recipient.role}`,
-          location: recipient.address,
-          quantity: item.quantity,
-          notes: `Order ${order._id} completed`
-        });
-
-        await product.save();
-      }
-    }
+    order.updatedAt = new Date();
 
     await order.save();
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
-    res.json({
-      message: 'Order status updated successfully',
-      order
+// Get all orders by userId (either from_Id or to_Id)
+exports.getAllOrdersByUserId = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    // Find orders where userId is either from_Id or to_Id
+    const orders = await Order.find({
+      $or: [{ from_Id: userId }, { to_Id: userId }],
     });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
 
-// Get all orders
-exports.getAllOrders = async (req, res) => {
-  try {
-    const orders = await Order.find()
-      .populate('from', 'name businessName')
-      .populate('to', 'name businessName')
-      .populate('products.product', 'name');
-    res.json({ orders });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-
-// Get order by ID
-exports.getOrderById = async (req, res) => {
-  try {
-    const { orderId } = req.params;
-    const order = await Order.findById(orderId)
-      .populate('from', 'name businessName')
-      .populate('to', 'name businessName')
-      .populate('products.product', 'name');
-    if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+    if (orders.length === 0) {
+      return res.status(404).json({ message: "No orders found for this user" });
     }
-    res.json({ order });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
 
-// Get orders for a specific user
-exports.getOrdersForUser = async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const orders = await Order.find({ to: userId })
-      .populate('from', 'name businessName')
-      .populate('to', 'name businessName')
-      .populate('products.product', 'name');
-    res.json({ orders });
+    res.status(200).json(orders);
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };

@@ -1,28 +1,21 @@
+// routes/productRoutes.js
 const express = require("express");
+const {
+  createProduct,
+  updateProductStage,
+  getProductTraceability,
+  getAllProductsByUserId,
+  getAllProducts,
+  getProductView
+} =require('../controllers/productController')
+
 const router = express.Router();
-const productController = require("../controllers/productController");
-const { auth, checkRole } = require("../middleware/auth");
 
-router.post(
-  "/",
-  auth,
-  checkRole(["farmer", "manufacturer"]),
-  productController.addProduct
-);
-
-router.patch(
-  "/:productId/status",
-  auth,
-  checkRole(["farmer", "manufacturer", "distributor", "retailer"]),
-  productController.updateProductStatus
-);
-
-router.get("/:productId/trace", productController.getProductTrace);
-
-router.get("/:productId", productController.getProductById);
-
-router.get("/:currentOwner", productController.getProductsByOwner);
-
-router.get("/", productController.getAllProducts);
+router.post("/create", createProduct);
+router.get("/", getAllProducts);
+router.put("/update/:productId", updateProductStage);
+router.get("/trace/:productId", getProductTraceability);
+router.get("/user/:userType/:userId", getAllProductsByUserId);
+router.get('/view/:productId', getProductView);
 
 module.exports = router;

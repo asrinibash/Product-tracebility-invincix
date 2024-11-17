@@ -1,26 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const orderController = require("../controllers/orderController");
-const { auth, checkRole } = require("../middleware/auth");
+const orderController = require('../controllers/orderController');
 
-router.post(
-  "/",
-  auth,
-  checkRole(["manufacturer", "distributor", "retailer"]),
-  orderController.createOrder
-);
+// Create a new order
+router.post('/create', orderController.createOrder);
 
-router.patch(
-  "/:orderId/status",
-  auth,
-  checkRole(["farmer", "manufacturer", "distributor", "retailer"]),
-  orderController.updateOrderStatus
-);
+// Update order status
+router.put('/:orderNumber/status', orderController.updateOrderStatus);
 
-router.get("/", orderController.getAllOrders);
-
-router.get("/:orderId", orderController.getOrderById);
-
-router.get('/user-orders/:userId', orderController.getOrdersForUser);
+// Get all orders by userId (from_Id or to_Id)
+router.get('/user/:userId', orderController.getAllOrdersByUserId);
 
 module.exports = router;

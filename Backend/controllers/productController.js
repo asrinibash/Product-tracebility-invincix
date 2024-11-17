@@ -248,6 +248,7 @@ exports.getProductView = async (req, res) => {
       <body>
           <div class="container">
               <div class="header">
+                  <h1>Invincix-Del Monte Blockchain based Supplychain System</h1>
                   <h1 class="product-name">${product.productName} (${product.aftername})</h1>
                   <div class="product-id">Product ID: ${product.productId}</div>
                   ${product.farmer?.cropDetails?.organic ? '<span class="organic-badge">Organic</span>' : ''}

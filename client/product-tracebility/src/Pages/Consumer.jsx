@@ -32,7 +32,7 @@ const productImages = {
     "https://www.delmonte.com/sites/default/files/9e032bb31ec35e6436d5057ad4e27126214d854a.jpg",
   ],
 };
-const BASE_URL = "https://product-tracebility-invincix.vercel.app";
+const BASE_URL = "https://product-tracebility-invincix-1.onrender.com/api/products/view";
 const ProductListing = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

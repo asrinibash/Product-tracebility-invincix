@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Link, useLocation, Outlet } from "react-router-dom";
 import Header from "../components/Header";
-import logo from "../assets/invincix_R.svg";
+import logo from "../assets/logo.svg";
 
 // Sidebar Component
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {

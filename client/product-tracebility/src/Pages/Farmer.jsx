@@ -30,7 +30,7 @@ import {server} from "../main.jsx"
 
 const farmerProfile = {
   farmerId: "FARM-001",
-  name: "John Doe Farms",
+  name: "John Farms",
   farmLocation: "Fresno, California, USA",
   harvestDate: "2024-11-10T00:00:00.000Z",
   cropDetails: {

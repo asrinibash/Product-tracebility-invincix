@@ -7,8 +7,11 @@ import { Mail, Lock, ChevronRight, BarChart3, Truck, Factory, BoxesIcon } from "
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +41,7 @@ const Login = () => {
         });
         
         setTimeout(() => {
-          window.location.href = "/farmer";
+          navigate('farmer');
         }, 2000);
       } else {
         setError("Invalid email or password");

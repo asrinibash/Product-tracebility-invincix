@@ -1,5 +1,6 @@
 import React from 'react';
-import { HashRouter , Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import DashboardLayout from './Layouts/DashboardLayout';
 import Login from './Pages/Login';
 
@@ -10,10 +11,8 @@ import Distributer from './Pages/Distributer';
 import RetailerDashboard from './Pages/Retiler';
 import Consumer from './Pages/Consumer';
 
-
 // Auth Guard Component
 const ProtectedRoute = ({ children }) => {
-  // Replace this with your actual auth check
   const isAuthenticated = localStorage.getItem('authToken');
   
   if (!isAuthenticated) {
@@ -23,9 +22,14 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+// Add PropTypes validation
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
 const App = () => {
   return (
-    <HashRouter >
+    <HashRouter>
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
@@ -39,7 +43,7 @@ const App = () => {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate to="/farmer" replace />} />
+          <Route index element={<Navigate to="farmer" replace />} />
           <Route path="farmer" element={<Farmer />} />
           <Route path="manufacturer" element={<Manufacturer />} />
           <Route path="distributer" element={<Distributer />} />
@@ -49,9 +53,9 @@ const App = () => {
         </Route>
 
         {/* 404 Route */}
-        <Route path="*" element={<Navigate to="/farmer" replace />} />
+        <Route path="*" element={<Navigate to="farmer" replace />} />
       </Routes>
-    </HashRouter >
+    </HashRouter>
   );
 };
 

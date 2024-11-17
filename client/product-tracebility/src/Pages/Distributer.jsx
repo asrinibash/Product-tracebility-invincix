@@ -14,152 +14,151 @@ import {
   Leaf,
   Package,
   ShoppingCart,
-  User,
   Plus,
   Edit,
   RefreshCw,
   BoxesIcon,
-  MapPin,
-  Calendar,
-  DollarSign,
   BarChart3,
+  MapPin,
+  CalendarClock,
+  DollarSign,
+  Truck,
+  ClipboardList,
+  ThermometerSun,
+  Building2,
   Users,
-  Clock,
-  Store
+  Timer
 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {server} from "../main.tsx"
+import {server} from "../main.jsx"
 
 
-const RetailerProfile = {
-  retailerId: "RETAIL-001",
-  name: "SuperMart",
-  storeLocation: "San Francisco, California, USA",
-  shelfDate: "2024-11-15T00:00:00.000Z",
-  stock: 100,
-  establishedYear: "1995",
-  storeSize: "45,000 sq ft",
-  operatingHours: "7:00 AM - 11:00 PM",
-  departments: ["Grocery", "Produce", "Meat", "Dairy", "Bakery"],
-  customerFootfall: "2,500 daily",
-  certifications: ["Food Safety Certified", "Green Business Certified"],
-  metrics: {
-    avgDailySales: "$45,000",
-    inventoryTurnover: "15 days",
-    customerSatisfaction: "4.7/5"
-  }
-};
-
-const RetailerProfileCard = () => {
-  return (
-    <Card className="bg-white/50 backdrop-blur-sm mb-6">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Store className="h-5 w-5 text-purple-600" />
-          Retailer Profile
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-3">
-          <div className="flex items-center space-x-2">
-            <User className="h-4 w-4 text-muted-foreground" />
-            <p>
-              <span className="font-medium">Store Name:</span>{" "}
-              {RetailerProfile.name}
-            </p>
+const DistributorProfile = {
+    distributorId: "DIST-001",
+    name: "Fresh Produce Distributors",
+    shipmentDate: "2024-11-13T00:00:00.000Z",
+    warehouseLocation: "Los Angeles, California, USA",
+    deliveryDate: "2024-11-14T00:00:00.000Z",
+    fleetSize: "25 vehicles",
+    temperatureControl: "33°F - 39°F",
+    avgDeliveryTime: "24 hours",
+    activeClients: 150,
+    distributionRadius: "200 miles",
+    certifications: ["FDA Certified", "FSMA Compliant", "ISO 9001"],
+    handlingCapacity: "50,000 lbs/day",
+    performanceMetrics: {
+      onTimeDelivery: "98.5%",
+      orderAccuracy: "99.2%",
+      customerSatisfaction: "4.8/5"
+    }
+  };
+  
+  const DistributorProfileCard = () => {
+    return (
+      <Card className="bg-white/50 backdrop-blur-sm mb-6">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Truck className="h-5 w-5 text-green-600" />
+            Distributor Profile
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center space-x-2">
+              <Building2 className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Company Name:</span>{" "}
+                {DistributorProfile.name}
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <BoxesIcon className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Distributor ID:</span>{" "}
+                {DistributorProfile.distributorId}
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <MapPin className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Warehouse Location:</span>{" "}
+                {DistributorProfile.warehouseLocation}
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Timer className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Average Delivery Time:</span>{" "}
+                {DistributorProfile.avgDeliveryTime}
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Users className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Active Clients:</span>{" "}
+                {DistributorProfile.activeClients}
+              </p>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <MapPin className="h-4 w-4 text-muted-foreground" />
-            <p>
-              <span className="font-medium">Location:</span>{" "}
-              {RetailerProfile.storeLocation}
-            </p>
+          <div className="space-y-3">
+            <div className="flex items-center space-x-2">
+              <CalendarClock className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Next Shipment:</span>{" "}
+                {new Date(DistributorProfile.shipmentDate).toLocaleDateString()}
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <ThermometerSun className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Temperature Control:</span>{" "}
+                {DistributorProfile.temperatureControl}
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <ClipboardList className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Handling Capacity:</span>{" "}
+                {DistributorProfile.handlingCapacity}
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Truck className="h-4 w-4 text-muted-foreground" />
+              <p>
+                <span className="font-medium">Fleet Size:</span>{" "}
+                {DistributorProfile.fleetSize}
+              </p>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <BoxesIcon className="h-4 w-4 text-muted-foreground" />
-            <p>
-              <span className="font-medium">Retailer ID:</span>{" "}
-              {RetailerProfile.retailerId}
-            </p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-            <p>
-              <span className="font-medium">Established:</span>{" "}
-              {RetailerProfile.establishedYear}
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="flex items-center space-x-2">
-            <Clock className="h-4 w-4 text-muted-foreground" />
-            <p>
-              <span className="font-medium">Operating Hours:</span>{" "}
-              {RetailerProfile.operatingHours}
-            </p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Store className="h-4 w-4 text-muted-foreground" />
-            <p>
-              <span className="font-medium">Store Size:</span>{" "}
-              {RetailerProfile.storeSize}
-            </p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Users className="h-4 w-4 text-muted-foreground" />
-            <p>
-              <span className="font-medium">Daily Footfall:</span>{" "}
-              {RetailerProfile.customerFootfall}
-            </p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <ShoppingCart className="h-4 w-4 text-muted-foreground" />
-            <div>
-              <span className="font-medium">Departments:</span>{" "}
-              <div className="flex flex-wrap gap-1 mt-1">
-                {RetailerProfile.departments.map((department, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
-                  >
-                    {department}
-                  </span>
-                ))}
+          <div className="md:col-span-2">
+            <div className="flex items-start space-x-2">
+              <BarChart3 className="h-4 w-4 text-muted-foreground mt-1" />
+              <div>
+                <span className="font-medium">Performance Metrics</span>
+                <div className="grid grid-cols-3 gap-4 mt-2">
+                  <div className="bg-green-50 p-3 rounded-lg">
+                    <p className="text-sm text-green-800 font-medium">On-Time Delivery</p>
+                    <p className="text-lg font-semibold text-green-600">{DistributorProfile.performanceMetrics.onTimeDelivery}</p>
+                  </div>
+                  <div className="bg-blue-50 p-3 rounded-lg">
+                    <p className="text-sm text-blue-800 font-medium">Order Accuracy</p>
+                    <p className="text-lg font-semibold text-blue-600">{DistributorProfile.performanceMetrics.orderAccuracy}</p>
+                  </div>
+                  <div className="bg-purple-50 p-3 rounded-lg">
+                    <p className="text-sm text-purple-800 font-medium">Customer Satisfaction</p>
+                    <p className="text-lg font-semibold text-purple-600">{DistributorProfile.performanceMetrics.customerSatisfaction}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </CardContent>
+      </Card>
+    );
+  };
 
-        <div className="md:col-span-2">
-          <div className="flex items-start space-x-2">
-            <BarChart3 className="h-4 w-4 text-muted-foreground mt-1" />
-            <div>
-              <span className="font-medium">Store Performance</span>
-              <div className="grid grid-cols-3 gap-4 mt-2">
-                <div className="bg-purple-50 p-3 rounded-lg">
-                  <p className="text-sm text-purple-800 font-medium">Average Daily Sales</p>
-                  <p className="text-lg font-semibold text-purple-600">{RetailerProfile.metrics.avgDailySales}</p>
-                </div>
-                <div className="bg-orange-50 p-3 rounded-lg">
-                  <p className="text-sm text-orange-800 font-medium">Inventory Turnover</p>
-                  <p className="text-lg font-semibold text-orange-600">{RetailerProfile.metrics.inventoryTurnover}</p>
-                </div>
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="text-sm text-green-800 font-medium">Customer Satisfaction</p>
-                  <p className="text-lg font-semibold text-green-600">{RetailerProfile.metrics.customerSatisfaction}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-const RetailerDashboard = () => {
+const DistributorDashboard = () => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -170,7 +169,7 @@ const RetailerDashboard = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        `${server}/api/products/user/distributor/DIST-001`
+        `${server}/api/products/user/manufacturer/MANUF-001`
       );
       const data = await response.json();
       setProducts(Array.isArray(data) ? data : [data]);
@@ -182,7 +181,7 @@ const RetailerDashboard = () => {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        `${server}/api/orders/user/${RetailerProfile.retailerId}`
+        `${server}/api/orders/user/${DistributorProfile.distributorId}`
       );
       const data = await response.json();
       setOrders(data);
@@ -197,13 +196,13 @@ const RetailerDashboard = () => {
   }, []);
 
   const UpdateProductModal = ({ product, fetchProducts, onClose }) => {
-    // State to capture additional input fields for Retailer stage
+    // State to capture additional input fields for Distributor stage
     const [updateData, setUpdateData] = useState({
-      retailerId: "RETAIL-001",
-      name: "SuperMart",
-      storeLocation: "San Francisco, California, USA",
-      shelfDate: "2024-11-15",
-      stock: 100,
+      distributorId: "DIST-001",
+      name: "Fresh Produce Distributors",
+      shipmentDate: "2024-11-13",
+      warehouseLocation: "Los Angeles, California, USA",
+      deliveryDate: "2024-11-14",
       details: "",
     });
   
@@ -219,13 +218,13 @@ const RetailerDashboard = () => {
     // Handler for the update status action
     const handleUpdateStatus = async () => {
       const payload = {
-        stage: "Retailer",
+        stage: "Distributor",
         updateData: {
-          retailerId: updateData.retailerId || "RETAIL-001",
-          name: updateData.name || "SuperMart",
-          storeLocation: updateData.storeLocation || "San Francisco, California, USA",
-          shelfDate: updateData.shelfDate || new Date().toISOString().split("T")[0],
-          stock: updateData.stock || 100,
+          distributorId: updateData.distributorId || "DIST-001",
+          name: updateData.name || "Fresh Produce Distributors",
+          shipmentDate: updateData.shipmentDate || new Date().toISOString().split("T")[0],
+          warehouseLocation: updateData.warehouseLocation || "Los Angeles, California, USA",
+          deliveryDate: updateData.deliveryDate || new Date().toISOString().split("T")[0],
           details: updateData.details || "",
         },
       };
@@ -265,7 +264,7 @@ const RetailerDashboard = () => {
     return (
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Retailer Details</DialogTitle>
+          <DialogTitle>Distributor Details</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="space-y-2">
@@ -275,47 +274,46 @@ const RetailerDashboard = () => {
             <p>Organic: {product.farmer.cropDetails.organic ? "Yes" : "No"}</p>
             <p>Location: {product.farmer.farmLocation}</p>
           </div>
-          {/* Input for Retailer Name */}
+          {/* Input for Distributor Name */}
           <div>
-            <Label>Retailer Name</Label>
+            <Label>Distributor Name</Label>
             <Input
               type="text"
               name="name"
               value={updateData.name}
               onChange={handleChange}
-              placeholder="e.g., SuperMart"
+              placeholder="e.g., Fresh Produce Distributors"
             />
           </div>
-          {/* Input for Store Location */}
+          {/* Input for Shipment Date */}
           <div>
-            <Label>Store Location</Label>
-            <Input
-              type="text"
-              name="storeLocation"
-              value={updateData.storeLocation}
-              onChange={handleChange}
-              placeholder="e.g., San Francisco, California, USA"
-            />
-          </div>
-          {/* Input for Shelf Date */}
-          <div>
-            <Label>Shelf Date</Label>
+            <Label>Shipment Date</Label>
             <Input
               type="date"
-              name="shelfDate"
-              value={updateData.shelfDate}
+              name="shipmentDate"
+              value={updateData.shipmentDate}
               onChange={handleChange}
             />
           </div>
-          {/* Input for Stock */}
+          {/* Input for Warehouse Location */}
           <div>
-            <Label>Stock</Label>
+            <Label>Warehouse Location</Label>
             <Input
-              type="number"
-              name="stock"
-              value={updateData.stock}
+              type="text"
+              name="warehouseLocation"
+              value={updateData.warehouseLocation}
               onChange={handleChange}
-              placeholder="e.g., 100"
+              placeholder="e.g., Los Angeles, California, USA"
+            />
+          </div>
+          {/* Input for Delivery Date */}
+          <div>
+            <Label>Delivery Date</Label>
+            <Input
+              type="date"
+              name="deliveryDate"
+              value={updateData.deliveryDate}
+              onChange={handleChange}
             />
           </div>
           {/* Input for Details */}
@@ -326,7 +324,7 @@ const RetailerDashboard = () => {
               name="details"
               value={updateData.details}
               onChange={handleChange}
-              placeholder="Enter details about the stock and shelving"
+              placeholder="Enter details about the shipment"
             />
           </div>
           <Button onClick={handleUpdateStatus}>Update Product Status</Button>
@@ -334,7 +332,7 @@ const RetailerDashboard = () => {
       </DialogContent>
     );
   };
-
+  
   const OrdersListCard = () => {
     const [orders, setOrders] = useState([]); // Local state to hold orders
     const [loading, setLoading] = useState(true); // Loading state to show a loading indicator
@@ -343,7 +341,7 @@ const RetailerDashboard = () => {
       // Fetch orders from the API on component mount
       const fetchOrders = async () => {
         try {
-          const response = await fetch(`${server}/api/orders/user/RETAIL-001`);
+          const response = await fetch(`${server}/api/orders/user/DIST-001`);
           if (!response.ok) {
             throw new Error('Failed to fetch orders');
           }
@@ -379,7 +377,7 @@ const RetailerDashboard = () => {
               ? { ...order, status: newStatus }
               : order
           ));
-          toast.success("Opeartion success!", {
+          toast.success("Operation success!", {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -388,7 +386,7 @@ const RetailerDashboard = () => {
             draggable: true,
           });
         } else {
-          toast.error("Operation Failed!", {
+          toast.error("Operation Failed", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -458,11 +456,11 @@ const RetailerDashboard = () => {
       </Card>
     );
   };
-  
+
   const CreateOrderModal = () => {
     const [orderData, setOrderData] = useState({
       to_Id: "",
-      from_Id: RetailerProfile.retailerId, // Manufacturer ID from the profile
+      from_Id: DistributorProfile.distributorId, // Manufacturer ID from the profile
       productId: "", // product id
       productName: "", // product name
       quantity: 0, // product quantity
@@ -494,7 +492,7 @@ const RetailerDashboard = () => {
   
         // Refresh the orders after successful creation
         fetchOrders();
-        toast.success("Operation success!", {
+        toast.success("Operation successfull!", {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -596,7 +594,7 @@ const RetailerDashboard = () => {
           <div className="flex items-center space-x-3">
             <BoxesIcon className="h-8 w-8 text-blue-600" />
             <div>
-              <h1 className="text-2xl font-bold">Retailer Dashboard</h1>
+              <h1 className="text-2xl font-bold">Distributer Dashboard</h1>
               <p className="text-sm text-muted-foreground">
                 Del Monte Blockchain based Supply Chain Portal
               </p>
@@ -691,7 +689,7 @@ const RetailerDashboard = () => {
         </div>
 
         {/* Profile Card */}
-        <RetailerProfileCard/>
+        <DistributorProfileCard/>
 
         {/* Products and Orders Grid */}
         <div className="grid md:grid-cols-2 gap-6">
@@ -733,11 +731,11 @@ const RetailerDashboard = () => {
           </Card>
 
           {/* Orders List */}
-          <OrdersListCard/>
+         <OrdersListCard/>
         </div>
       </div>
     </div>
   );
 };
 
-export default RetailerDashboard;
+export default DistributorDashboard;

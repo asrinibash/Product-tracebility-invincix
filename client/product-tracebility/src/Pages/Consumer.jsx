@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Calendar, Factory, Truck, Store } from "lucide-react";
 import { QRCodeCanvas } from 'qrcode.react';
-import {server} from "../main"
+import {server} from "../main.jsx"
 
 
 

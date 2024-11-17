@@ -19,38 +19,45 @@ import {
   Edit,
   RefreshCw,
   BoxesIcon,
-  BarChart3,
   MapPin,
   Calendar,
   DollarSign,
-  FileText,
-  Award,
-  Factory,
+  BarChart3,
+  Users,
+  Clock,
+  Store
 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {server} from "../main.tsx"
+import {server} from "../main.jsx"
 
-const ManufacturerProfile = {
-  manufacturerId: "MANUF-001",
-  name: "Del Monte Foods Inc.",
-  location: "Modesto, California, USA",
-  productionDate: "2024-11-12",
-  ingredients: ["Roma Tomato Puree", "Salt", "Sugar", "Spices"],
-  batchNumber: "BATCH-20241112",
-  details: "Tomatoes processed into sauce, sterilized, and canned.",
-  establishedYear: "1886",
-  certifications: ["ISO 9001:2015", "HACCP"],
-  productionCapacity: "50,000 units/day",
-  facilitySize: "250,000 sq ft",
+
+const RetailerProfile = {
+  retailerId: "RETAIL-001",
+  name: "SuperMart",
+  storeLocation: "San Francisco, California, USA",
+  shelfDate: "2024-11-15T00:00:00.000Z",
+  stock: 100,
+  establishedYear: "1995",
+  storeSize: "45,000 sq ft",
+  operatingHours: "7:00 AM - 11:00 PM",
+  departments: ["Grocery", "Produce", "Meat", "Dairy", "Bakery"],
+  customerFootfall: "2,500 daily",
+  certifications: ["Food Safety Certified", "Green Business Certified"],
+  metrics: {
+    avgDailySales: "$45,000",
+    inventoryTurnover: "15 days",
+    customerSatisfaction: "4.7/5"
+  }
 };
-const ManufacturerProfileCard = () => {
+
+const RetailerProfileCard = () => {
   return (
     <Card className="bg-white/50 backdrop-blur-sm mb-6">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Factory className="h-5 w-5 text-blue-600" />
-          Manufacturer Profile
+          <Store className="h-5 w-5 text-purple-600" />
+          Retailer Profile
         </CardTitle>
       </CardHeader>
       <CardContent className="grid md:grid-cols-2 gap-6">
@@ -58,66 +65,66 @@ const ManufacturerProfileCard = () => {
           <div className="flex items-center space-x-2">
             <User className="h-4 w-4 text-muted-foreground" />
             <p>
-              <span className="font-medium">Company Name:</span>{" "}
-              {ManufacturerProfile.name}
+              <span className="font-medium">Store Name:</span>{" "}
+              {RetailerProfile.name}
             </p>
           </div>
           <div className="flex items-center space-x-2">
             <MapPin className="h-4 w-4 text-muted-foreground" />
             <p>
               <span className="font-medium">Location:</span>{" "}
-              {ManufacturerProfile.location}
+              {RetailerProfile.storeLocation}
             </p>
           </div>
           <div className="flex items-center space-x-2">
             <BoxesIcon className="h-4 w-4 text-muted-foreground" />
             <p>
-              <span className="font-medium">Manufacturer ID:</span>{" "}
-              {ManufacturerProfile.manufacturerId}
+              <span className="font-medium">Retailer ID:</span>{" "}
+              {RetailerProfile.retailerId}
             </p>
           </div>
           <div className="flex items-center space-x-2">
             <Calendar className="h-4 w-4 text-muted-foreground" />
             <p>
               <span className="font-medium">Established:</span>{" "}
-              {ManufacturerProfile.establishedYear}
+              {RetailerProfile.establishedYear}
             </p>
           </div>
         </div>
 
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <Clock className="h-4 w-4 text-muted-foreground" />
             <p>
-              <span className="font-medium">Batch Number:</span>{" "}
-              {ManufacturerProfile.batchNumber}
+              <span className="font-medium">Operating Hours:</span>{" "}
+              {RetailerProfile.operatingHours}
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <Factory className="h-4 w-4 text-muted-foreground" />
+            <Store className="h-4 w-4 text-muted-foreground" />
             <p>
-              <span className="font-medium">Facility Size:</span>{" "}
-              {ManufacturerProfile.facilitySize}
+              <span className="font-medium">Store Size:</span>{" "}
+              {RetailerProfile.storeSize}
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <Award className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-muted-foreground" />
             <p>
-              <span className="font-medium">Certifications:</span>{" "}
-              {ManufacturerProfile.certifications.join(", ")}
+              <span className="font-medium">Daily Footfall:</span>{" "}
+              {RetailerProfile.customerFootfall}
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <Leaf className="h-4 w-4 text-muted-foreground" />
+            <ShoppingCart className="h-4 w-4 text-muted-foreground" />
             <div>
-              <span className="font-medium">Ingredients:</span>{" "}
+              <span className="font-medium">Departments:</span>{" "}
               <div className="flex flex-wrap gap-1 mt-1">
-                {ManufacturerProfile.ingredients.map((ingredient, index) => (
+                {RetailerProfile.departments.map((department, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                    className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
                   >
-                    {ingredient}
+                    {department}
                   </span>
                 ))}
               </div>
@@ -127,12 +134,23 @@ const ManufacturerProfileCard = () => {
 
         <div className="md:col-span-2">
           <div className="flex items-start space-x-2">
-            <FileText className="h-4 w-4 text-muted-foreground mt-1" />
+            <BarChart3 className="h-4 w-4 text-muted-foreground mt-1" />
             <div>
-              <span className="font-medium">Production Details:</span>
-              <p className="text-gray-600 mt-1">
-                {ManufacturerProfile.details}
-              </p>
+              <span className="font-medium">Store Performance</span>
+              <div className="grid grid-cols-3 gap-4 mt-2">
+                <div className="bg-purple-50 p-3 rounded-lg">
+                  <p className="text-sm text-purple-800 font-medium">Average Daily Sales</p>
+                  <p className="text-lg font-semibold text-purple-600">{RetailerProfile.metrics.avgDailySales}</p>
+                </div>
+                <div className="bg-orange-50 p-3 rounded-lg">
+                  <p className="text-sm text-orange-800 font-medium">Inventory Turnover</p>
+                  <p className="text-lg font-semibold text-orange-600">{RetailerProfile.metrics.inventoryTurnover}</p>
+                </div>
+                <div className="bg-green-50 p-3 rounded-lg">
+                  <p className="text-sm text-green-800 font-medium">Customer Satisfaction</p>
+                  <p className="text-lg font-semibold text-green-600">{RetailerProfile.metrics.customerSatisfaction}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -141,7 +159,7 @@ const ManufacturerProfileCard = () => {
   );
 };
 
-const ManufacturerDashboard = () => {
+const RetailerDashboard = () => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -151,7 +169,9 @@ const ManufacturerDashboard = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${server}/api/products/`);
+      const response = await fetch(
+        `${server}/api/products/user/distributor/DIST-001`
+      );
       const data = await response.json();
       setProducts(Array.isArray(data) ? data : [data]);
     } catch (error) {
@@ -162,7 +182,7 @@ const ManufacturerDashboard = () => {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        `${server}/api/orders/user/${ManufacturerProfile.manufacturerId}`
+        `${server}/api/orders/user/${RetailerProfile.retailerId}`
       );
       const data = await response.json();
       setOrders(data);
@@ -177,17 +197,16 @@ const ManufacturerDashboard = () => {
   }, []);
 
   const UpdateProductModal = ({ product, fetchProducts, onClose }) => {
-    // State to capture additional input fields
+    // State to capture additional input fields for Retailer stage
     const [updateData, setUpdateData] = useState({
-      manufacturerId: "MANUF-001",
-      name: "Del Monte Foods Inc.",
-      location: "Modesto, California, USA",
-      productionDate: "2024-11-12",
-      ingredients: "",
-      batchNumber: `Batch-${Date.now()}`,
+      retailerId: "RETAIL-001",
+      name: "SuperMart",
+      storeLocation: "San Francisco, California, USA",
+      shelfDate: "2024-11-15",
+      stock: 100,
       details: "",
     });
-
+  
     // Handler for input changes
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -196,39 +215,31 @@ const ManufacturerDashboard = () => {
         [name]: value,
       }));
     };
-
+  
     // Handler for the update status action
     const handleUpdateStatus = async () => {
       const payload = {
-        stage: "Manufacturer",
+        stage: "Retailer",
         updateData: {
-          manufacturerId: updateData.manufacturerId || "MANUF-001",
-          name: updateData.name || "Del Monte Foods Inc.",
-          location: updateData.location || "Modesto, California, USA",
-          productionDate:
-            updateData.productionDate || new Date().toISOString().split("T")[0],
-          ingredients: updateData.ingredients
-            ? updateData.ingredients.split(",").map((item) => item.trim())
-            : [],
-          batchNumber: updateData.batchNumber || `Batch-${Date.now()}`,
+          retailerId: updateData.retailerId || "RETAIL-001",
+          name: updateData.name || "SuperMart",
+          storeLocation: updateData.storeLocation || "San Francisco, California, USA",
+          shelfDate: updateData.shelfDate || new Date().toISOString().split("T")[0],
+          stock: updateData.stock || 100,
           details: updateData.details || "",
         },
       };
-
+  
       try {
-        await fetch(
-          `${server}/api/products/update/${product.productId}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          }
-        );
-
+        await fetch(`${server}/api/products/update/${product.productId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+  
         if (typeof fetchProducts === "function") {
           await fetchProducts();
         }
-
         toast.success("Operation successfull!", {
           position: "top-right",
           autoClose: 2000,
@@ -250,11 +261,11 @@ const ManufacturerDashboard = () => {
         console.error("Error updating product:", error);
       }
     };
-
+  
     return (
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Product Details</DialogTitle>
+          <DialogTitle>Retailer Details</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="space-y-2">
@@ -264,15 +275,47 @@ const ManufacturerDashboard = () => {
             <p>Organic: {product.farmer.cropDetails.organic ? "Yes" : "No"}</p>
             <p>Location: {product.farmer.farmLocation}</p>
           </div>
-          {/* Input for Ingredients */}
+          {/* Input for Retailer Name */}
           <div>
-            <Label>Ingredients (comma-separated)</Label>
+            <Label>Retailer Name</Label>
             <Input
               type="text"
-              name="ingredients"
-              value={updateData.ingredients}
+              name="name"
+              value={updateData.name}
               onChange={handleChange}
-              placeholder="e.g., Green Beans, Salt, Sugar, Spices"
+              placeholder="e.g., SuperMart"
+            />
+          </div>
+          {/* Input for Store Location */}
+          <div>
+            <Label>Store Location</Label>
+            <Input
+              type="text"
+              name="storeLocation"
+              value={updateData.storeLocation}
+              onChange={handleChange}
+              placeholder="e.g., San Francisco, California, USA"
+            />
+          </div>
+          {/* Input for Shelf Date */}
+          <div>
+            <Label>Shelf Date</Label>
+            <Input
+              type="date"
+              name="shelfDate"
+              value={updateData.shelfDate}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Input for Stock */}
+          <div>
+            <Label>Stock</Label>
+            <Input
+              type="number"
+              name="stock"
+              value={updateData.stock}
+              onChange={handleChange}
+              placeholder="e.g., 100"
             />
           </div>
           {/* Input for Details */}
@@ -283,7 +326,7 @@ const ManufacturerDashboard = () => {
               name="details"
               value={updateData.details}
               onChange={handleChange}
-              placeholder="Enter details about the product processing"
+              placeholder="Enter details about the stock and shelving"
             />
           </div>
           <Button onClick={handleUpdateStatus}>Update Product Status</Button>
@@ -291,6 +334,7 @@ const ManufacturerDashboard = () => {
       </DialogContent>
     );
   };
+
   const OrdersListCard = () => {
     const [orders, setOrders] = useState([]); // Local state to hold orders
     const [loading, setLoading] = useState(true); // Loading state to show a loading indicator
@@ -299,7 +343,7 @@ const ManufacturerDashboard = () => {
       // Fetch orders from the API on component mount
       const fetchOrders = async () => {
         try {
-          const response = await fetch(`${server}/api/orders/user/MANUF-001`);
+          const response = await fetch(`${server}/api/orders/user/RETAIL-001`);
           if (!response.ok) {
             throw new Error('Failed to fetch orders');
           }
@@ -335,7 +379,7 @@ const ManufacturerDashboard = () => {
               ? { ...order, status: newStatus }
               : order
           ));
-          toast.success("Operation successfull!", {
+          toast.success("Opeartion success!", {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -344,7 +388,7 @@ const ManufacturerDashboard = () => {
             draggable: true,
           });
         } else {
-          toast.error("Operation Failed", {
+          toast.error("Operation Failed!", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -414,32 +458,32 @@ const ManufacturerDashboard = () => {
       </Card>
     );
   };
-
+  
   const CreateOrderModal = () => {
     const [orderData, setOrderData] = useState({
       to_Id: "",
-      from_Id: ManufacturerProfile.manufacturerId, // Manufacturer ID from the profile
+      from_Id: RetailerProfile.retailerId, // Manufacturer ID from the profile
       productId: "", // product id
       productName: "", // product name
       quantity: 0, // product quantity
       price: 0, // product price
     });
-
+  
     // Calculate the total amount dynamically (for now it's price * quantity)
     const calculateTotalAmount = () => {
       return orderData.quantity * orderData.price;
     };
-
+  
     const handleSubmit = async (e) => {
       e.preventDefault();
-
+  
       const totalAmount = calculateTotalAmount();
-
+  
       const payload = {
         ...orderData,
         totalAmount, // Add the total amount
       };
-
+  
       try {
         // Send the POST request to create the order
         await fetch(`${server}/api/orders/create`, {
@@ -447,10 +491,10 @@ const ManufacturerDashboard = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-
+  
         // Refresh the orders after successful creation
         fetchOrders();
-        toast.success("Operation successfull!", {
+        toast.success("Operation success!", {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -461,7 +505,6 @@ const ManufacturerDashboard = () => {
         // Close the modal
         setIsCreateOrderOpen(false);
       } catch (error) {
-        console.error("Error creating order:", error);
         toast.error("Operation Failed!", {
           position: "top-right",
           autoClose: 3000,
@@ -470,9 +513,10 @@ const ManufacturerDashboard = () => {
           pauseOnHover: true,
           draggable: true,
         });
+        console.error("Error creating order:", error);
       }
     };
-
+  
     return (
       <DialogContent>
         <DialogHeader>
@@ -483,9 +527,7 @@ const ManufacturerDashboard = () => {
             <Label>To ID</Label>
             <Input
               value={orderData.to_Id}
-              onChange={(e) =>
-                setOrderData({ ...orderData, to_Id: e.target.value })
-              }
+              onChange={(e) => setOrderData({ ...orderData, to_Id: e.target.value })}
             />
           </div>
           <div>
@@ -513,10 +555,7 @@ const ManufacturerDashboard = () => {
                 type="number"
                 value={orderData.quantity}
                 onChange={(e) =>
-                  setOrderData({
-                    ...orderData,
-                    quantity: parseInt(e.target.value),
-                  })
+                  setOrderData({ ...orderData, quantity: parseInt(e.target.value) })
                 }
               />
             </div>
@@ -526,10 +565,7 @@ const ManufacturerDashboard = () => {
                 type="number"
                 value={orderData.price}
                 onChange={(e) =>
-                  setOrderData({
-                    ...orderData,
-                    price: parseInt(e.target.value),
-                  })
+                  setOrderData({ ...orderData, price: parseInt(e.target.value) })
                 }
               />
             </div>
@@ -539,7 +575,6 @@ const ManufacturerDashboard = () => {
       </DialogContent>
     );
   };
- 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -561,7 +596,7 @@ const ManufacturerDashboard = () => {
           <div className="flex items-center space-x-3">
             <BoxesIcon className="h-8 w-8 text-blue-600" />
             <div>
-              <h1 className="text-2xl font-bold">Manufacturer Dashboard</h1>
+              <h1 className="text-2xl font-bold">Retailer Dashboard</h1>
               <p className="text-sm text-muted-foreground">
                 Del Monte Blockchain based Supply Chain Portal
               </p>
@@ -656,7 +691,7 @@ const ManufacturerDashboard = () => {
         </div>
 
         {/* Profile Card */}
-        <ManufacturerProfileCard />
+        <RetailerProfileCard/>
 
         {/* Products and Orders Grid */}
         <div className="grid md:grid-cols-2 gap-6">
@@ -698,11 +733,11 @@ const ManufacturerDashboard = () => {
           </Card>
 
           {/* Orders List */}
-        <OrdersListCard/>
+          <OrdersListCard/>
         </div>
       </div>
     </div>
   );
 };
 
-export default ManufacturerDashboard;
+export default RetailerDashboard;

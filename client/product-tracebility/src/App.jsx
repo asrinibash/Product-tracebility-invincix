@@ -39,7 +39,7 @@ const App = () => {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route index element={<Navigate to="/farmer" replace />} />
           <Route path="farmer" element={<Farmer />} />
           <Route path="manufacturer" element={<Manufacturer />} />
           <Route path="distributer" element={<Distributer />} />
@@ -49,7 +49,7 @@ const App = () => {
         </Route>
 
         {/* 404 Route */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/farmer" replace />} />
       </Routes>
     </BrowserRouter>
   );

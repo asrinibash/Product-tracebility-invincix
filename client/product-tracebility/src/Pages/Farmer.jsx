@@ -78,34 +78,9 @@ const FarmerDashboard = () => {
   }, []);
 
   const OrdersListCard = () => {
-    const [orders, setOrders] = useState([]); // Local state to hold orders
-    const [loading, setLoading] = useState(true); // Loading state to show a loading indicator
-  
-    useEffect(() => {
-      // Fetch orders from the API on component mount
-      const fetchOrders = async () => {
-        try {
-          const response = await fetch(`${server}/api/orders/user/FARM-001`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch orders');
-          }
-          const data = await response.json();
-          setOrders(data); // Set the fetched orders to the state
-        } catch (error) {
-          console.error('Error fetching orders:', error);
-        } finally {
-          setLoading(false); // Stop loading indicator
-        }
-      };
-  
-      fetchOrders(); // Call the fetchOrders function
-    }, []); // Empty dependency array to run this only once on component mount
-  
-    // If the data is still loading, show a loading message or spinner
-    if (loading) {
-      return <div>Loading orders...</div>;
-    }
-  
+    // We can use the orders state and functions from the parent component
+    // No need to duplicate the state management
+    
     const updateOrderStatus = async (orderNumber, newStatus) => {
       try {
         const response = await fetch(`${server}/api/orders/${orderNumber}/status`, {
@@ -115,12 +90,8 @@ const FarmerDashboard = () => {
         });
   
         if (response.ok) {
-          // Update the order status in local state
-          setOrders(orders.map((order) =>
-            order.orderNumber === orderNumber
-              ? { ...order, status: newStatus }
-              : order
-          ));
+          // Refresh the orders list after successful update
+          fetchOrders();
           toast.success("Status updated!", {
             position: "top-right",
             autoClose: 2000,
@@ -141,7 +112,7 @@ const FarmerDashboard = () => {
         }
       } catch (error) {
         console.error('Error updating status:', error);
-        alert('Error updating order status');
+        toast.error("Error updating order status");
       }
     };
   
@@ -160,7 +131,7 @@ const FarmerDashboard = () => {
             ) : (
               orders.map((order) => (
                 <div
-                  key={order._id} // Use unique order ID
+                  key={order._id}
                   className="p-4 border rounded-lg hover:bg-blue-50 transition-colors"
                 >
                   <div className="flex justify-between items-center">
@@ -181,7 +152,6 @@ const FarmerDashboard = () => {
                       </p>
                     </div>
                     <div>
-                      {/* Button to update the status */}
                       <Button
                         onClick={() => updateOrderStatus(order.orderNumber, 'accepted')}
                         variant="outline"

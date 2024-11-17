@@ -14,6 +14,8 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { Link, useLocation, Outlet } from "react-router-dom";
+import Header from "../components/Header";
+import logo from "../assets/invincix_R.svg";
 
 // Sidebar Component
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
@@ -79,69 +81,23 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-4 border-t">
+        <div className="p-2 border-t flex items-center justify-between relative">
+          {/* Logo Section */}
+          <div className="flex items-center ml-2">
+            <img src={logo} alt="Invincix Logo" className="h-6 w-auto" />
+          </div>
+
+          {/* Help & Support Link */}
           <Link
-            to="help" // removed leading slash
-            className="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg"
+            to="help"
+            className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
           >
-            <HelpCircle className="h-5 w-5" />
-            {isSidebarOpen && <span className="ml-3">Help & Support</span>}
+            <HelpCircle className="h-4 w-4" />
+            {isSidebarOpen && <span className="ml-1 text-sm">Help & Support</span>}
           </Link>
         </div>
       </div>
     </aside>
-  );
-};
-
-// Header Component
-const Header = ({ toggleSidebar, isSidebarOpen }) => {
-  return (
-    <header className="bg-white border-b px-4 py-3">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggleSidebar}
-            className="p-2 hover:bg-gray-100 rounded-lg lg:hidden"
-          >
-            {isSidebarOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
-
-          {/* Search */}
-          <div className="hidden sm:flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-lg">
-            <Search className="h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="bg-transparent border-none focus:outline-none text-sm w-64"
-            />
-          </div>
-        </div>
-
-        {/* Right Section */}
-        <div className="flex items-center gap-3">
-          <button className="p-2 hover:bg-gray-100 rounded-lg relative">
-            <Bell className="h-5 w-5" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-          </button>
-
-          <div className="flex items-center gap-3 border-l pl-3">
-            <div className="hidden sm:block text-right">
-              <p className="text-sm font-medium">Suraj Sahoo</p>
-              <p className="text-xs text-muted-foreground">
-                Supply Chain Manager
-              </p>
-            </div>
-            <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-              <span className="text-blue-600 font-medium">JD</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
   );
 };
 

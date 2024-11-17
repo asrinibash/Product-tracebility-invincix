@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter , Routes, Route, Navigate } from 'react-router-dom';
 import DashboardLayout from './Layouts/DashboardLayout';
 import Login from './Pages/Login';
 
@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter >
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
@@ -51,7 +51,7 @@ const App = () => {
         {/* 404 Route */}
         <Route path="*" element={<Navigate to="/farmer" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter >
   );
 };
 

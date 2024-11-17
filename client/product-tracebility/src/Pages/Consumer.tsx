@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import { Calendar, Factory, Truck, Store } from "lucide-react";
 import { QRCodeCanvas } from 'qrcode.react';
+import {server} from "../main"
+
 
 
 // Image mapping object
@@ -30,7 +32,7 @@ const productImages = {
     "https://www.delmonte.com/sites/default/files/9e032bb31ec35e6436d5057ad4e27126214d854a.jpg",
   ],
 };
-const BASE_URL = "http://localhost:8080/api/products/view/";
+const BASE_URL = "https://product-tracebility-invincix-1.onrender.com";
 const ProductListing = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,7 +75,7 @@ const ProductListing = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/products/user/retailer/RETAIL-001");
+        const response = await fetch(`${server}/api/products/user/retailer/RETAIL-001`);
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }

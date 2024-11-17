@@ -8,3 +8,7 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 )
+
+
+
+export const server = "https://product-tracebility-invincix-1.onrender.com";

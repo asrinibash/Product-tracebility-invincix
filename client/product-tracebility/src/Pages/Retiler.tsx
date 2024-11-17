@@ -29,6 +29,8 @@ import {
 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {server} from "../main.tsx"
+
 
 const RetailerProfile = {
   retailerId: "RETAIL-001",
@@ -168,7 +170,7 @@ const RetailerDashboard = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/products/user/distributor/DIST-001`
+        `${server}/api/products/user/distributor/DIST-001`
       );
       const data = await response.json();
       setProducts(Array.isArray(data) ? data : [data]);
@@ -180,7 +182,7 @@ const RetailerDashboard = () => {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/orders/user/${RetailerProfile.retailerId}`
+        `${server}/api/orders/user/${RetailerProfile.retailerId}`
       );
       const data = await response.json();
       setOrders(data);
@@ -229,7 +231,7 @@ const RetailerDashboard = () => {
       };
   
       try {
-        await fetch(`http://localhost:8080/api/products/update/${product.productId}`, {
+        await fetch(`${server}/api/products/update/${product.productId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -341,7 +343,7 @@ const RetailerDashboard = () => {
       // Fetch orders from the API on component mount
       const fetchOrders = async () => {
         try {
-          const response = await fetch('http://localhost:8080/api/orders/user/RETAIL-001');
+          const response = await fetch(`${server}/api/orders/user/RETAIL-001`);
           if (!response.ok) {
             throw new Error('Failed to fetch orders');
           }
@@ -364,7 +366,7 @@ const RetailerDashboard = () => {
   
     const updateOrderStatus = async (orderNumber, newStatus) => {
       try {
-        const response = await fetch(`http://localhost:8080/api/orders/${orderNumber}/status`, {
+        const response = await fetch(`${server}/api/orders/${orderNumber}/status`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: newStatus }),
@@ -484,7 +486,7 @@ const RetailerDashboard = () => {
   
       try {
         // Send the POST request to create the order
-        await fetch("http://localhost:8080/api/orders/create", {
+        await fetch(`${server}/api/orders/create`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),

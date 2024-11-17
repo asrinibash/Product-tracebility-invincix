@@ -31,6 +31,8 @@ import {
 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {server} from "../main.tsx"
+
 
 const DistributorProfile = {
     distributorId: "DIST-001",
@@ -156,7 +158,7 @@ const DistributorProfile = {
     );
   };
 
-const ManufacturerDashboard = () => {
+const DistributorDashboard = () => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -167,7 +169,7 @@ const ManufacturerDashboard = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/products/user/manufacturer/MANUF-001`
+        `${server}/api/products/user/manufacturer/MANUF-001`
       );
       const data = await response.json();
       setProducts(Array.isArray(data) ? data : [data]);
@@ -179,7 +181,7 @@ const ManufacturerDashboard = () => {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/orders/user/${DistributorProfile.distributorId}`
+        `${server}/api/orders/user/${DistributorProfile.distributorId}`
       );
       const data = await response.json();
       setOrders(data);
@@ -228,7 +230,7 @@ const ManufacturerDashboard = () => {
       };
   
       try {
-        await fetch(`http://localhost:8080/api/products/update/${product.productId}`, {
+        await fetch(`${server}/api/products/update/${product.productId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -339,7 +341,7 @@ const ManufacturerDashboard = () => {
       // Fetch orders from the API on component mount
       const fetchOrders = async () => {
         try {
-          const response = await fetch('http://localhost:8080/api/orders/user/DIST-001');
+          const response = await fetch(`${server}/api/orders/user/DIST-001`);
           if (!response.ok) {
             throw new Error('Failed to fetch orders');
           }
@@ -362,7 +364,7 @@ const ManufacturerDashboard = () => {
   
     const updateOrderStatus = async (orderNumber, newStatus) => {
       try {
-        const response = await fetch(`http://localhost:8080/api/orders/${orderNumber}/status`, {
+        const response = await fetch(`${server}/api/orders/${orderNumber}/status`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: newStatus }),
@@ -482,7 +484,7 @@ const ManufacturerDashboard = () => {
   
       try {
         // Send the POST request to create the order
-        await fetch("http://localhost:8080/api/orders/create", {
+        await fetch(`${server}/api/orders/create`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -736,4 +738,4 @@ const ManufacturerDashboard = () => {
   );
 };
 
-export default ManufacturerDashboard;
+export default DistributorDashboard;

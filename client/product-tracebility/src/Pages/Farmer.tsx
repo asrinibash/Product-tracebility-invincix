@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {server} from "../main.tsx"
 
 const farmerProfile = {
   farmerId: "FARM-001",
@@ -50,7 +51,7 @@ const FarmerDashboard = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/products/user/farmer/${farmerProfile.farmerId}`
+        `${server}/api/products/user/farmer/${farmerProfile.farmerId}`
       );
       const data = await response.json();
       setProducts(Array.isArray(data) ? data : [data]);
@@ -62,7 +63,7 @@ const FarmerDashboard = () => {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/orders/user/${farmerProfile.farmerId}`
+        `${server}/api/orders/user/${farmerProfile.farmerId}`
       );
       const data = await response.json();
       setOrders(data);
@@ -84,7 +85,7 @@ const FarmerDashboard = () => {
       // Fetch orders from the API on component mount
       const fetchOrders = async () => {
         try {
-          const response = await fetch('http://localhost:8080/api/orders/user/FARM-001');
+          const response = await fetch(`${server}/api/orders/user/FARM-001`);
           if (!response.ok) {
             throw new Error('Failed to fetch orders');
           }
@@ -107,7 +108,7 @@ const FarmerDashboard = () => {
   
     const updateOrderStatus = async (orderNumber, newStatus) => {
       try {
-        const response = await fetch(`http://localhost:8080/api/orders/${orderNumber}/status`, {
+        const response = await fetch(`${server}/api/orders/${orderNumber}/status`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: newStatus }),
@@ -225,7 +226,7 @@ const FarmerDashboard = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        await fetch("http://localhost:8080/api/products/create", {
+        await fetch(`${server}/api/products/create`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(productData),

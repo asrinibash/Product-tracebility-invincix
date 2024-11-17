@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, ChevronRight, BarChart3, Truck, Factory,BoxesIcon } from "lucide-react";
+import { Mail, Lock, ChevronRight, BarChart3, Truck, Factory, BoxesIcon } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,13 +25,9 @@ const Login = () => {
     // Simulate an async operation (e.g., API call)
     setTimeout(() => {
       if (email === hardcodedEmail && password === hardcodedPassword) {
-        // Hardcoded token
         const token = "mock-token-123456789";
-
-        // Store token in localStorage
         localStorage.setItem("authToken", token);
-
-        // Show success toast with configuration
+        
         toast.success("Authorisation success!", {
           position: "top-right",
           autoClose: 2000,
@@ -41,13 +37,11 @@ const Login = () => {
           draggable: true,
         });
         
-        // Add a small delay before redirecting to ensure toast is visible
         setTimeout(() => {
           window.location.href = "/farmer";
         }, 2000);
       } else {
         setError("Invalid email or password");
-        // Show error toast with configuration
         toast.error("Invalid email or password!", {
           position: "top-right",
           autoClose: 3000,
@@ -76,8 +70,9 @@ const Login = () => {
         theme="light"
       />
      <Card className="w-full max-w-4xl overflow-hidden shadow-2xl">
-        <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/2 p-8">
+        <div className="flex flex-col md:flex-row">
+          {/* Left Section */}
+          <div className="w-full md:w-1/2 p-8">
             <div className="flex items-center space-x-2 mb-8">
               <BoxesIcon className="h-8 w-8 text-blue-600" />
               <div>
@@ -167,7 +162,7 @@ const Login = () => {
           </div>
 
           {/* Right Section - Features & Info */}
-          <div className="hidden lg:block lg:w-1/2 bg-blue-600 p-8 text-white relative overflow-hidden">
+          <div className="w-full md:w-1/2 bg-blue-600 p-8 text-white relative overflow-hidden">
             <div className="relative z-10">
               <h3 className="text-2xl font-bold mb-4">
                 Supply Chain Excellence

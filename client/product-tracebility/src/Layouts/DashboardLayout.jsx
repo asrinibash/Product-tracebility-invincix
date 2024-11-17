@@ -114,7 +114,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
           
           <div className="flex items-center gap-3 border-l pl-3">
             <div className="hidden sm:block text-right">
-              <p className="text-sm font-medium">John Doe</p>
+              <p className="text-sm font-medium">Suraj Sahoo</p>
               <p className="text-xs text-muted-foreground">Supply Chain Manager</p>
             </div>
             <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">

@@ -28,6 +28,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     { icon: Package, label: "Retailer", path: "retailer" }, // removed leading slash
     { icon: Users, label: "Consumers", path: "consumer" }, // removed leading slash
     { icon: Settings, label: "Settings", path: "settings" }, // removed leading slash
+    { icon: HelpCircle, label: "Help & Support", path: "help" }, // removed leading slash
   ];
 
   return (
@@ -44,11 +45,8 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         >
           <BoxesIcon className="h-8 w-8 text-blue-600" />
           {isSidebarOpen && (
-            <div className="ml-2">
-              <h1 className="text-xl font-bold">Invincix</h1>
-              <p className="text-xs text-muted-foreground">
-                Blockchain based Supply Chain Poartal
-              </p>
+            <div className="ml-2 w-36">
+              <h4 className="text-sm font-medium">Blockchain based Supply Chain Portal</h4>
             </div>
           )}
         </div>
@@ -81,20 +79,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-2 border-t flex items-center justify-between relative">
+        <div className="h-14 border-t l-4 flex items-center justify-start relative pl-8">
           {/* Logo Section */}
-          <div className="flex items-center ml-2">
+          <div className="flext">
             <img src={logo} alt="Invincix Logo" className="h-6 w-auto" />
           </div>
 
-          {/* Help & Support Link */}
-          <Link
-            to="help"
-            className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
-          >
-            <HelpCircle className="h-4 w-4" />
-            {isSidebarOpen && <span className="ml-1 text-sm">Help & Support</span>}
-          </Link>
         </div>
       </div>
     </aside>

@@ -94,13 +94,15 @@ const Login = () => {
             <div className="flex items-center space-x-2 mb-8">
               <BoxesIcon className="h-8 w-8 text-blue-600" />
               <div>
-                <h1 className="text-2xl font-bold">Invincix</h1>
+              <h3 className="text-xl font-medium">
+                Blockchain based Supply Chain Portal
+              </h3>
               </div>
             </div>
 
             <div className="space-y-6">
               <div>
-                <h2 className="text-3xl font-bold mb-2">Welcome Back</h2>
+                <h2 className="text-3xl font-bold mb-2">Welcome Back !</h2>
                 <p className="text-muted-foreground">
                   Access your supply chain management dashboard
                 </p>
@@ -178,9 +180,7 @@ const Login = () => {
           {/* Right Section - Features & Info */}
           <div className="w-full md:w-1/2  p-8 text-white relative overflow-hidden bg-gradient-to-r from-cyan-600 to-blue-700">
             <div className="relative z-10">
-              <h3 className="text-2xl  mb-4">
-                Blockchain based Supply Chain Portal
-              </h3>
+              
               <h4 className="text-2xl font-bold mb-2">
                Supply Chain Excellence
               </h4>
